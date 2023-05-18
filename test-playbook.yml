@@ -13,11 +13,12 @@
         - postgresql
         - postgresql-server
       state: present
-      
+
 #Inicialice PostgreSQL     
   - name: Enable service postgresql-server
     ansible.builtin.service:
       name: postgresql
+      enabled: yes
       state: started
       
 #Asegúrese de que los servicios de PostgreSQL se encuentren habilitados y activos
