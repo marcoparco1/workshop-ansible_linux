@@ -1,1 +1,15 @@
-
+---
+#Escriba la definición de su playbook, los hosts sobre los que se ejecutará, que realice escalamiento de privilegios y que obtenga facts.
+- hosts: node1
+  name: Prueba Linux
+  become: true
+  gather_facts: true
+  
+  tasks:
+#Instale los paquetes necesarios para correr PostgreSQL
+  - name: Install Postgress
+    ansible.builtin.yum:
+      name:
+        - postgresql
+        - postgresql-server
+      state: present
