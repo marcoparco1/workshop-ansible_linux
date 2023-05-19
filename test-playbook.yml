@@ -5,14 +5,14 @@
   become: true
   gather_facts: true
   
-      
+  tasks:    
  #Cambie el hostname de la máquina
     - name: Set a hostname
       ansible.builtin.hostname:
         name: marcolocalhost
         
- - name: Get IP address remote server
-    debug:
+    - name: Get IP address remote server
+      debug:
         
    
 
