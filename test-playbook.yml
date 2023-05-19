@@ -11,12 +11,17 @@
       ansible.builtin.hostname:
         name: marcolocalhost
         
- # Obtenga la IP y hostname del servidor y proceda a imprimir un mensaje que contenga estos datos
+# Obtenga la IP y hostname del servidor y proceda a imprimir un mensaje que contenga estos datos
     - name: Get IP address remote server
       debug: 
         msg: "IP adress: {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }} Hostname: {{ ansible_hostname }}"
         
-   
+#Agregue la línea "IP HOSTNAME" en el archivo /etc/hosts, donde IP es la ip del equipo y HOSTNAME el nuevo nombre que le dio al equipo en una de las tareas anteriores   
+    - name: Add to /etc/hosts IP HOSTNAME
+      ansible.builtin.lineinfile: 
+        path: /etc/hosts      
+        line: {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }} {{ ansible_hostname }}
+
 
 
         
