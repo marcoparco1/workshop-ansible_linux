@@ -63,7 +63,7 @@
         method: md5
         users: marco
         create: true
-        notify: restart postgres
+        notify: restart_postgresl
         
     handlers:
       - name: restart_postgresql
