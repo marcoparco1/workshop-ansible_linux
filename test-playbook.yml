@@ -40,7 +40,7 @@
         #state: restarted
 #Cree una base de datos
   - name: Create  database
-    community.postgresql.postgresql_db:
+    postgresql_db:
       state: present
       name: db_marcopparco
         
