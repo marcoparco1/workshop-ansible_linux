@@ -32,15 +32,9 @@
       enabled: yes
       state: started
       
-#Asegúrese de que los servicios de PostgreSQL se encuentren habilitados y activos
-  #handlers:
-    #- name: restart_postgresql
-      #service:
-        #name: postgresql
-        #state: restarted
 #Cree una base de datos
   - name: Create  database
-    postgresql_db:
+    community.postgresql.postgresql_db:
       state: present
       name: db_marcopparco
         
@@ -50,6 +44,33 @@
       state: present
       name: marco
       password: marcoparco
+      
+ #Habilite  los accesos para el usuario creado a la base de datos creada en los pasos anteriores
+ 
+   - name: "Grant marco access to db_marcopparco"
+      postgresql_privs:
+        db: db_marcopparco
+        privs: ALL
+        type: database
+        role: marco
+  #Permita la conexión md5 para el usuario de base de datos   
+  
+    - name: Allow md5 connection for the db marco
+      postgresql_pg_hba:
+        dest: "~/data/pg_hba.conf"
+        contype: host
+        databases: all
+        method: md5
+        users: marco
+        create: true
+        notify: restart postgres
+        
+    handlers:
+      - name: restart_postgresql
+        service:
+          name: postgresql
+          state: restarted
+        
 
 
 
