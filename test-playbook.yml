@@ -14,7 +14,7 @@
  # Obtenga la IP y hostname del servidor y proceda a imprimir un mensaje que contenga estos datos
     - name: Get IP address remote server
       debug: 
-        msg: IP adress: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}" Hostname: "{{ ansible_hostname }}"
+        msg: "IP adress: {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }} Hostname: {{ ansible_hostname }}"
         
    
 
