@@ -56,13 +56,7 @@
         method: md5
         users: marco
         create: true
-        notify: restart postgres
-        
-    handlers:
-      - name: restart_postgresql
-        service:
-          name: postgresql
-          state: restarted
+        notify: restart_postgresql
           
  #Cree un respaldo de su base de datos en la ruta /tmp/backup_db
     - name: Dump an existing database to a file
