@@ -20,7 +20,7 @@
     - name: Add to /etc/hosts IP HOSTNAME
       ansible.builtin.lineinfile: 
         path: /etc/hosts      
-        line: {{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }} {{ ansible_hostname }}
+        line: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }} {{ ansible_hostname }}"
 
 
 
