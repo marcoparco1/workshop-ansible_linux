@@ -33,11 +33,11 @@
       state: started
       
 #Asegúrese de que los servicios de PostgreSQL se encuentren habilitados y activos
-  handlers:
-    - name: restart_postgresql
-      service:
-        name: postgresql
-        state: restarted
+  #handlers:
+    #- name: restart_postgresql
+      #service:
+        #name: postgresql
+        #state: restarted
 #Cree una base de datos
   - name: Create  database
     community.postgresql.postgresql_db:
