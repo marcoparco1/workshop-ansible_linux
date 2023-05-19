@@ -5,71 +5,18 @@
   become: true
   gather_facts: true
   
-  tasks:
-#Instale los paquetes necesarios para correr PostgreSQL
-  - name: Install Postgress
-    ansible.builtin.yum:
-      name:
-        - postgresql
-        - postgresql-server
-      state: present
-
-#Inicialice PostgreSQL           
-  - name: Find out if PostgreSQL is initialized
-    ansible.builtin.stat:
-      path: "/var/lib/pgsql/data/pg_hba.conf"
-    register: postgres_data
       
-  - name: "Initialize PostgreSQL"
-    shell: "postgresql-setup initdb"
-    when: not postgres_data.stat.exists
-      
-#Asegúrese de que los servicios de PostgreSQL se encuentren habilitados y activos
-
-  - name: Enable service httpd, and not touch the state
-    ansible.builtin.service:
-      name: postgresql
-      enabled: yes
-      state: started
-      
-#Cree una base de datos
-  - name: Create  database
-    community.postgresql.postgresql_db:
-      state: present
-      name: db_marcopparco
+ #Cambie el hostname de la máquina
+    - name: Set a hostname
+      ansible.builtin.hostname:
+        name: marcolocalhost
         
-#Cree un usuario de base de datos
-  - name: "Create db user"
-    community.postgresql.postgresql_user:
-      state: present
-      name: marco
-      password: marcoparco
-      
- #Habilite  los accesos para el usuario creado a la base de datos creada en los pasos anteriores
- 
-   - name: "Grant marco access to db_marcopparco"
-      postgresql_privs:
-        db: db_marcopparco
-        privs: ALL
-        type: database
-        role: marco
-  #Permita la conexión md5 para el usuario de base de datos   
-  
-    - name: Allow md5 connection for the db marco
-      postgresql_pg_hba:
-        dest: "~/data/pg_hba.conf"
-        contype: host
-        databases: all
-        method: md5
-        users: marco
-        create: true
-        notify: restart postgres
+ - name: Get IP address remote server
+    debug:
         
-    handlers:
-      - name: restart_postgresql
-        service:
-          name: postgresql
-          state: restarted
+   
+
+
         
 
 
