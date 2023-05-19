@@ -39,17 +39,17 @@
         name: postgresql
         state: restarted
 #Cree una base de datos
-   - name: Create  database
-     community.postgresql.postgresql_db:
-       state: present
-       name: db_marcopparco
+  - name: Create  database
+    community.postgresql.postgresql_db:
+      state: present
+      name: db_marcopparco
         
 #Cree un usuario de base de datos
-   - name: "Create db user"
-     community.postgresql.postgresql_user:
-       state: present
-       name: marco
-       password: marcoparco
+  - name: "Create db user"
+    community.postgresql.postgresql_user:
+      state: present
+      name: marco
+      password: marcoparco
 
 
 
