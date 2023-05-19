@@ -11,8 +11,10 @@
       ansible.builtin.hostname:
         name: marcolocalhost
         
+ # Obtenga la IP y hostname del servidor y proceda a imprimir un mensaje que contenga estos datos
     - name: Get IP address remote server
-      debug:
+      debug: 
+        msg: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
         
    
 
