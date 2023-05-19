@@ -1,0 +1,6 @@
+---
+- name: test linux
+  hosts: web
+  roles:
+    - role1
+    - role2
